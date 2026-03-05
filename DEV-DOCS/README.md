@@ -1,7 +1,7 @@
 # DEV-DOCS - Developer Documentation (frozensapphire)
 
 **Last Updated:** March 5, 2026  
-**Status:** Draft
+**Status:** In Progress
 
 This folder is the canonical home for frozensapphire development documentation, requirements, and roadmap planning.
 
@@ -61,7 +61,8 @@ DEV-DOCS/
 - Auth baseline implemented with credentials login and middleware-protected admin routes.
 - RBAC capability checks are enforced for protected content APIs.
 - Initial content CRUD vertical slice is implemented and tested.
-- CI gates now include lint, typecheck, unit, integration, build, and comment-policy checks.
+- Playwright E2E baseline and deterministic seed profiles are in place.
+- CI gates now include commit policy, lint, typecheck, unit, integration, e2e, build, and comment-policy checks.
 
 ## Documentation Standards
 

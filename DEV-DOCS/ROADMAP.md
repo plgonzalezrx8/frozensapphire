@@ -1,7 +1,7 @@
 # Roadmap
 
 **Last Updated:** March 5, 2026  
-**Status:** Draft
+**Status:** In Progress
 
 ## Purpose
 
@@ -9,29 +9,29 @@ Provide a milestone-based roadmap aligned with the TRD’s 16-week cadence.
 
 ## Current State
 
-Foundation is complete and Milestone 1 is in progress:
+MVP platform hardening and quality gates are now in progress:
 
 - Completed: scaffold, Prisma baseline, API skeleton, CI/test harness.
-- Completed: credentials auth baseline, middleware admin protection, RBAC guard foundation.
-- In progress: first content CRUD vertical slice hardening and coverage expansion.
-- Not started: editor/media/taxonomies/themes/plugins/import/export/privacy.
+- Completed: deterministic seed profiles and baseline migration files.
+- In progress: Infisical + Neon CI orchestration, Playwright E2E expansion, and security workflows.
+- Planned next: Neon Auth migration and RBAC stabilization.
 
 ## Milestones (16-week cadence)
 
 ### Milestone 0 — Foundations (Week 1)
 - Scaffold Next.js, Prisma, CI, dev tooling
 - Health endpoints and baseline API stubs
-**Status:** Complete
+**Status:** In Progress
 
 **Exit criteria**
 - App runs locally
 - Prisma migrations execute in dev
 
 ### Milestone 1 — Auth + RBAC + Admin Shell (Weeks 2–3)
-- Auth.js credentials
+- Neon Auth integration
 - RBAC guards and audit logging
 - Admin shell protected
-**Status:** In Progress
+**Status:** Planned
 
 ### Milestone 2 — Content Core (Weeks 4–5)
 - Content types and items CRUD

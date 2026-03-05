@@ -9,17 +9,19 @@
 3. `docker-compose up -d`
 4. `pnpm prisma:generate`
 5. `pnpm prisma:migrate`
-6. `pnpm dev`
+6. `pnpm seed:dev`
+7. `pnpm dev`
 
 Open `http://localhost:3000` for the public site and `http://localhost:3000/admin` for the admin shell.
 
 ## Authentication
 
-After running seed (`pnpm prisma db seed`), demo users are available with password `ChangeMe123!`:
+After running seed (`pnpm seed:dev`), demo users are available with password `ChangeMe123!`:
 
 - `admin@frozensapphire.local`
 - `editor@frozensapphire.local`
 - `author@frozensapphire.local`
+- `author2@frozensapphire.local`
 - `contributor@frozensapphire.local`
 
 ## Development notes
@@ -32,10 +34,30 @@ After running seed (`pnpm prisma db seed`), demo users are available with passwo
 
 - Unit tests: `pnpm test:unit`
 - Integration tests: `pnpm test:integration`
-- Combined CI test run: `pnpm test:ci`
+- End-to-end tests: `pnpm test:e2e`
+- Combined CI test run: `pnpm test:ci` (unit + integration)
 - Type checking: `pnpm typecheck`
 - Linting: `pnpm lint`
 - Comment policy check: `pnpm comments:check`
+
+## Seed Profiles
+
+- Development seed: `pnpm seed:dev`
+- Integration test seed: `pnpm seed:test`
+- E2E test seed: `pnpm seed:e2e`
+
+## Infisical in CI and Local
+
+CI and deploy workflows load secrets from Infisical using OIDC in GitHub Actions.
+
+- CI workflow: `/Users/pedrogonzalez/CascadeProjects/frozensapphire/.github/workflows/ci.yml`
+- Deploy workflow: `/Users/pedrogonzalez/CascadeProjects/frozensapphire/.github/workflows/deploy.yml`
+
+Local usage pattern:
+
+1. `infisical login`
+2. `infisical run --env=dev -- pnpm test:integration`
+3. `infisical run --env=dev -- pnpm test:e2e`
 
 ## Planning documents
 
@@ -67,6 +89,7 @@ Short-lived branches are required for sprint and feature work, for example:
 Workflow:
 
 1. Branch from `development`.
-2. Open PR into `development` for testing/validation.
-3. Merge `development` into `master` for releases.
-4. Delete merged short-lived branches.
+2. Make feature-complete commits only (implementation + tests + required comments/JSDoc + docs updates).
+3. Open PR into `development` for testing/validation.
+4. Merge `development` into `master` for releases.
+5. Delete merged short-lived branches.

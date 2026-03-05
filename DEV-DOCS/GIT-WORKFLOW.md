@@ -34,8 +34,40 @@ Merges into `development` and `master` require passing checks:
 - `pnpm comments:check`
 - `pnpm lint`
 - `pnpm typecheck`
-- `pnpm test:ci`
+- `pnpm test:unit`
+- `pnpm test:integration`
+- `pnpm test:e2e`
 - `pnpm build`
+- Commitlint PR check (`type(scope): summary`)
+
+## Commit Convention and Discipline
+
+Commit message format is mandatory:
+
+- `type(scope): summary`
+
+Allowed types:
+
+- `feat`
+- `fix`
+- `refactor`
+- `test`
+- `docs`
+- `chore`
+- `ci`
+- `security`
+
+Allowed scopes:
+
+- `auth`, `rbac`, `content`, `editor`, `media`, `taxonomy`, `settings`, `themes`, `plugins`, `comments`, `api`, `db`, `ci`, `docs`, `tests`, `seed`, `security`
+
+Rules:
+
+1. Every feature must end in a feature-complete commit before starting another feature.
+2. Do not mix unrelated features in one commit.
+3. Feature commits must include implementation, tests, and required comments/JSDoc.
+4. Include docs updates when behavior or workflow changes.
+5. No WIP commits on PR branches.
 
 ## Release Cadence Guidance
 

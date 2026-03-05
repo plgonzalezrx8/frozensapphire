@@ -1,7 +1,7 @@
 # 00 - Start Here
 
 **Last Updated:** March 5, 2026  
-**Status:** Draft
+**Status:** In Progress
 
 ## Purpose
 
@@ -18,7 +18,8 @@ The project has a working baseline: scaffolded Next.js app, Prisma schema, CI/te
 3. Start local services: `docker-compose up -d`
 4. Generate Prisma client: `pnpm prisma:generate`
 5. Apply migrations: `pnpm prisma:migrate`
-6. Run dev server: `pnpm dev`
+6. Seed local data: `pnpm seed:dev`
+7. Run dev server: `pnpm dev`
 
 ## What to Read Next
 
