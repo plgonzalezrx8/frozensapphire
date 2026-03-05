@@ -15,6 +15,9 @@
     "test:ci": "pnpm test:unit && pnpm test:integration",
     "comments:check": "node scripts/comments-check.mjs",
     "commitlint": "commitlint --from=HEAD~20 --to=HEAD --verbose",
+    "seed:dev": "tsx prisma/seeds/dev-run.ts",
+    "seed:test": "tsx prisma/seeds/test-run.ts",
+    "seed:e2e": "tsx prisma/seeds/e2e-run.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
@@ -54,6 +57,6 @@
     "vitest": "^2.1.0"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "pnpm seed:dev"
   }
 }

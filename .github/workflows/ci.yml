@@ -151,7 +151,7 @@ jobs:
         run: pnpm prisma migrate deploy
 
       - name: Seed integration data
-        run: pnpm prisma db seed
+        run: pnpm seed:test
 
       - name: Run integration tests
         run: pnpm test:integration
@@ -232,7 +232,7 @@ jobs:
         run: pnpm prisma migrate deploy
 
       - name: Seed e2e data
-        run: pnpm prisma db seed
+        run: pnpm seed:e2e
 
       - name: Build application
         run: pnpm build
