@@ -1,135 +1,169 @@
 # Implementation Plan
 ## Project: frozensapphire (Next.js CMS)
 
-This document translates the TRD and parity matrix into an execution plan with milestones, dependencies, and immediate tasks.
+This document translates the TRD and parity matrix into an execution plan with locked decisions and milestone delivery targets.
 
-## 1) Delivery Strategy
+## 1) Locked Decisions
 
-- Build in **vertical slices** (auth -> content -> media -> publishing -> comments) so each milestone ships usable functionality.
-- Keep all MVP scope aligned to **P0 parity targets** from the WordPress matrix.
-- Delay P1/P2 items unless they unblock a P0 item.
+- **Editor:** Tiptap
+- **API:** REST v1 only (no GraphQL in MVP)
+- **Tenancy:** Single-tenant schema for MVP
+- **Scope:** Follow TRD MVP scope (includes import/export, privacy tools, and site health)
+- **Plugins:** In-process hooks for MVP; sandbox later
 
-## 2) Milestones and Exit Criteria
+## 2) Delivery Strategy
 
-## Milestone 0 — Foundations (Week 1)
-**Goal:** Establish the baseline engineering platform.
+- Build in **vertical slices** (auth → content → media → publishing → comments) to keep milestones shippable.
+- Keep MVP scope aligned to **P0 parity targets** plus TRD MVP items.
+- Defer P1/P2 unless they unblock P0 delivery.
 
-### Work items
-- Initialize Next.js + TypeScript + ESLint + Prettier.
-- Add Prisma + PostgreSQL schema baseline.
-- Add Auth.js and session strategy.
-- Add project structure (`src/modules/*`, `src/lib/*`, `src/app/(admin)` and public routes).
-- Add CI workflow for lint, typecheck, and test commands.
+## 3) Milestones and Exit Criteria
 
-### Exit criteria
-- Project runs locally with a health endpoint.
-- DB migration pipeline works in dev.
-- CI passes on pull requests.
+### Milestone 0 — Foundation
+**Goal:** Establish baseline engineering platform.
 
-## Milestone 1 — Identity + RBAC + Admin Shell (Weeks 2–3)
+**Work items**
+- Next.js App Router scaffold with TypeScript and Tailwind.
+- Prisma + PostgreSQL base schema and migrations.
+- Redis + MinIO local stack via docker-compose.
+- Health endpoint (`/api/v1/health`).
+- CI pipeline for lint/typecheck/tests.
+
+**Exit criteria**
+- App runs locally and responds to `/api/v1/health`.
+- Prisma migrations execute successfully in dev.
+
+### Milestone 1 — Auth, RBAC, Audit, Admin Shell
 **Goal:** Secure admin access and role-based authorization.
 
-### Work items
-- Implement users, roles, capabilities schema.
-- Seed default roles: Administrator, Editor, Author, Contributor, Subscriber.
-- Add authorization middleware and helper guards.
-- Build admin layout and nav shell.
-- Add audit log service for privileged actions.
+**Work items**
+- Users/roles/capabilities schema and seed.
+- Auth.js credentials flow (email/password).
+- RBAC middleware and guard helpers.
+- Audit log service.
+- Admin layout + dashboard shell.
 
-### Exit criteria
-- Role checks enforced on protected admin/API endpoints.
-- Admin shell accessible to authorized users only.
-- Unauthorized attempts are logged and return 403.
+**Exit criteria**
+- Admin shell reachable with role checks enforced.
+- Unauthorized access returns 403 and logs audit entry.
 
-## Milestone 2 — Content Core (Weeks 4–5)
+### Milestone 2 — Content Core
 **Goal:** Create/manage posts, pages, and custom content types.
 
-### Work items
-- Add content types and content items CRUD.
-- Implement statuses: draft, pending, scheduled, published.
-- Add slug generation and uniqueness constraints.
-- Add reading settings (latest posts vs static front page).
-- Add basic public rendering routes for posts/pages.
+**Work items**
+- `content_types` and `content_items` CRUD.
+- Status workflow (draft/pending/scheduled/published).
+- Slug generation and uniqueness rules.
+- Public rendering routes for posts/pages.
+- Reading settings (static front page vs latest posts).
 
-### Exit criteria
+**Exit criteria**
 - Content can be created, edited, published, and rendered publicly.
-- Slug/permalink behavior is deterministic and tested.
+- Slug/permalink behavior deterministic and tested.
 
-## Milestone 3 — Editor + Media (Weeks 6–8)
+### Milestone 3 — Editor + Media
 **Goal:** Usable authoring experience with media support.
 
-### Work items
-- Integrate block editor framework (Tiptap or Lexical decision by week 6).
-- Implement core block set: paragraph, heading, image, gallery, embed.
-- Add media upload service to object storage.
-- Add media library browser with search/filter.
-- Add image variants (thumbnail + responsive sizes).
+**Work items**
+- Tiptap block editor integration.
+- Core blocks (paragraph, heading, image, gallery, embed).
+- Media upload service and metadata editing.
+- Media library grid with search/filter.
+- Image variants worker (thumbnail + responsive sizes).
 
-### Exit criteria
-- Editors can publish media-rich posts from admin.
+**Exit criteria**
+- Editors can publish media-rich posts.
 - Media metadata can be updated and retrieved.
 
-## Milestone 4 — Taxonomies + Comments + API v1 (Weeks 9–10)
+### Milestone 4 — Taxonomies, Menus, Settings, Themes
+**Goal:** Finish site structure and theming base.
+
+**Work items**
+- Taxonomies/terms with assignment flow.
+- Menu management + theme menu locations.
+- Settings UI (general/reading/writing/media/discussion/permalinks).
+- Theme activation and template rendering.
+
+**Exit criteria**
+- Taxonomies and menus affect public rendering.
+- Settings changes applied immediately or within documented cache window.
+
+### Milestone 5 — Comments + REST API v1
 **Goal:** Complete baseline CMS workflows and external access.
 
-### Work items
-- Categories/tags models and assignment flows.
-- Comment submission and moderation queue.
-- REST API v1 for content, taxonomies, media, comments.
-- API auth via session + scoped token support.
+**Work items**
+- Comment submission + moderation flow.
+- REST API v1 for core entities.
+- Scoped API tokens with revocation.
 
-### Exit criteria
+**Exit criteria**
 - Public comment flow and moderation works end-to-end.
-- API endpoints are documented and pass integration tests.
+- API endpoints documented and pass integration tests.
 
-## Milestone 5 — Hardening + MVP Release (Weeks 11–12)
+### Milestone 6 — Import/Export + Privacy + Health
+**Goal:** Deliver operational tooling required by TRD MVP scope.
+
+**Work items**
+- JSON export job and downloadable artifact.
+- JSON import job with idempotency.
+- Privacy request workflow (export/erase).
+- Health dashboard checks (DB/cache/storage/queue).
+
+**Exit criteria**
+- Import/export flows complete with progress reporting.
+- Health dashboard reflects system checks.
+
+### Milestone 7 — Plugins + Hooks (MVP Beta)
+**Goal:** Provide extension points.
+
+**Work items**
+- Plugin registry and lifecycle (install/activate/deactivate/uninstall).
+- Hook registry with typed action/filter contracts.
+- Recovery mode for plugin failures.
+
+**Exit criteria**
+- Plugins can register hooks without breaking core flows.
+
+### Milestone 8 — Hardening + Release
 **Goal:** Stabilize and ship MVP.
 
-### Work items
-- Revisions/autosave minimum implementation.
-- Health dashboard checks (DB/cache/storage/queue).
-- Security hardening (rate limiting, CSRF, upload validation).
-- E2E test coverage for critical paths.
-- Production deployment runbook and rollback plan.
+**Work items**
+- CSRF protection for session mutations.
+- Rate limiting for login/comments/token endpoints.
+- Upload validation and scanning stubs.
+- E2E coverage for publish flow/media/moderation.
+- Performance baseline tests.
+- Release checklist + staging runbook.
 
-### Exit criteria
+**Exit criteria**
 - P0 scope accepted in staging.
 - No critical security defects.
-- Release checklist completed.
-
-## 3) Dependency Order
-
-1. Foundation stack (framework, DB, auth)  
-2. RBAC + admin shell  
-3. Content model + rendering  
-4. Editor + media  
-5. Taxonomies/comments/API  
-6. Hardening and release
+- Release checklist complete.
 
 ## 4) Immediate Execution Backlog (Next 10 Working Days)
 
 ### Day 1–2
-- Create Next.js app and module folders.
-- Add Prisma, DB config, first migration.
-- Add local docker compose for PostgreSQL + Redis.
+- Scaffold Next.js app + module folders.
+- Add Prisma schema and migration pipeline.
+- Add docker-compose for Postgres + Redis + MinIO.
 
 ### Day 3–4
 - Implement user/role/capability schema + seeds.
-- Add Auth.js login/session and admin route protection.
+- Add Auth.js login/session and admin protection.
 
 ### Day 5–6
-- Build admin shell layout and dashboard placeholder cards.
+- Build admin shell layout and dashboard placeholders.
 - Add audit log utility and middleware integration.
 
 ### Day 7–8
-- Implement `content_types` and `content_items` tables.
-- Add CRUD routes and admin forms for posts/pages.
+- Implement `content_types` and `content_items` CRUD.
+- Add admin forms for posts/pages.
 
 ### Day 9–10
-- Add slug generation and content status transitions.
+- Add slug generation + status transitions.
 - Add baseline tests for role checks and content CRUD.
 
-## 5) Definition of “Started” (Get to Work)
+## 5) Definition of “Started”
 
 Engineering execution is considered started when all of the following are merged:
 - Framework scaffold with running app
@@ -139,14 +173,13 @@ Engineering execution is considered started when all of the following are merged
 
 ## 6) Risks and Mitigations
 
-- **Editor complexity risk:** Timebox block-editor choice; ship minimal block set first.
+- **Editor complexity risk:** Timebox block-editor work; ship minimal block set first.
 - **Permission drift risk:** Centralize capability checks in shared authz service.
 - **Schema churn risk:** Freeze naming conventions before Milestone 2 migrations.
-- **Scope creep risk:** Enforce P0-only rule through sprint planning and PR review checklist.
+- **Scope creep risk:** Enforce P0-only rule in sprint planning and PR review.
 
 ## 7) Tracking Cadence
 
 - Weekly milestone review (scope, blockers, risk)
 - Daily async standup (done/next/blockers)
 - Friday release train to staging with test report
-

@@ -1,0 +1,528 @@
+// Prisma schema for frozensapphire CMS.
+// Maps application models to the required snake_case tables.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ContentStatus {
+  draft
+  pending
+  scheduled
+  published
+}
+
+enum CommentStatus {
+  pending
+  approved
+  spam
+  trash
+}
+
+enum JobStatus {
+  queued
+  running
+  completed
+  failed
+}
+
+enum PluginStatus {
+  installed
+  active
+  inactive
+}
+
+/// User accounts for CMS access.
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  name         String?
+  passwordHash String?       @map("password_hash")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  roles        UserRole[]
+  authAccounts AuthAccount[]
+  authSessions AuthSession[]
+  auditLogs    AuditLog[]
+  contentItems ContentItem[] @relation("ContentAuthor")
+
+  @@map("users")
+}
+
+/// Roles define permission bundles.
+model Role {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String?
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+
+  users       UserRole[]
+  capabilities RoleCapability[]
+
+  @@map("roles")
+}
+
+/// Capabilities represent granular permissions.
+model Capability {
+  id          String           @id @default(uuid())
+  key         String           @unique
+  description String?
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+
+  roles       RoleCapability[]
+
+  @@map("capabilities")
+}
+
+/// Join table mapping roles to capabilities.
+model RoleCapability {
+  id            String      @id @default(uuid())
+  roleId        String      @map("role_id")
+  capabilityId  String      @map("capability_id")
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  role          Role        @relation(fields: [roleId], references: [id])
+  capability    Capability  @relation(fields: [capabilityId], references: [id])
+
+  @@unique([roleId, capabilityId])
+  @@map("role_capabilities")
+}
+
+/// Join table mapping users to roles.
+model UserRole {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  roleId    String   @map("role_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id])
+  role Role @relation(fields: [roleId], references: [id])
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
+}
+
+/// Auth.js account mapping for OAuth or credentials.
+model AuthAccount {
+  id                 String   @id @default(uuid())
+  userId             String   @map("user_id")
+  provider           String
+  providerAccountId  String   @map("provider_account_id")
+  refreshToken       String?  @map("refresh_token")
+  accessToken        String?  @map("access_token")
+  accessTokenExpires DateTime? @map("access_token_expires")
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+  @@map("auth_accounts")
+}
+
+/// Auth.js session mapping.
+model AuthSession {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("auth_sessions")
+}
+
+/// Content type registry for posts, pages, and custom types.
+model ContentType {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  schema      Json
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  contentItems ContentItem[]
+
+  @@map("content_types")
+}
+
+/// Content items for posts/pages/custom types.
+model ContentItem {
+  id           String        @id @default(uuid())
+  typeId       String        @map("type_id")
+  authorId     String        @map("author_id")
+  title        String
+  slug         String
+  status       ContentStatus @default(draft)
+  content      Json
+  fields       Json?         @map("fields")
+  publishedAt  DateTime?     @map("published_at")
+  scheduledAt  DateTime?     @map("scheduled_at")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  type         ContentType   @relation(fields: [typeId], references: [id])
+  author       User          @relation("ContentAuthor", fields: [authorId], references: [id])
+  revisions    ContentRevision[]
+  autosaves    ContentAutosave[]
+  terms        ContentTerm[]
+  comments     Comment[]
+
+  @@unique([typeId, slug])
+  @@index([status])
+  @@index([publishedAt])
+  @@map("content_items")
+}
+
+/// Immutable revision snapshots for content items.
+model ContentRevision {
+  id          String   @id @default(uuid())
+  contentId   String   @map("content_id")
+  title       String
+  content     Json
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  contentItem ContentItem @relation(fields: [contentId], references: [id])
+
+  @@map("content_revisions")
+}
+
+/// Autosaved snapshots for in-progress content edits.
+model ContentAutosave {
+  id          String   @id @default(uuid())
+  contentId   String   @map("content_id")
+  payload     Json
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  contentItem ContentItem @relation(fields: [contentId], references: [id])
+
+  @@map("content_autosaves")
+}
+
+/// Taxonomy definitions (categories, tags, custom taxonomies).
+model Taxonomy {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  terms     Term[]
+
+  @@map("taxonomies")
+}
+
+/// Taxonomy terms for content classification.
+model Term {
+  id          String   @id @default(uuid())
+  taxonomyId  String   @map("taxonomy_id")
+  name        String
+  slug        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  taxonomy    Taxonomy     @relation(fields: [taxonomyId], references: [id])
+  contentLinks ContentTerm[]
+
+  @@unique([taxonomyId, slug])
+  @@map("terms")
+}
+
+/// Join table mapping content items to terms.
+model ContentTerm {
+  id         String   @id @default(uuid())
+  contentId  String   @map("content_id")
+  termId     String   @map("term_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  contentItem ContentItem @relation(fields: [contentId], references: [id])
+  term        Term        @relation(fields: [termId], references: [id])
+
+  @@unique([contentId, termId])
+  @@map("content_terms")
+}
+
+/// Media assets stored in object storage.
+model MediaAsset {
+  id         String   @id @default(uuid())
+  filename   String
+  mimeType   String   @map("mime_type")
+  sizeBytes  Int      @map("size_bytes")
+  url        String
+  metadata   Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  variants   MediaVariant[]
+
+  @@map("media_assets")
+}
+
+/// Media variants generated for responsive images.
+model MediaVariant {
+  id        String   @id @default(uuid())
+  assetId   String   @map("asset_id")
+  label     String
+  url       String
+  width     Int?
+  height    Int?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  asset     MediaAsset @relation(fields: [assetId], references: [id])
+
+  @@map("media_variants")
+}
+
+/// Comments on content items.
+model Comment {
+  id          String        @id @default(uuid())
+  contentId   String        @map("content_id")
+  parentId    String?       @map("parent_id")
+  authorName  String        @map("author_name")
+  authorEmail String        @map("author_email")
+  body        String
+  status      CommentStatus @default(pending)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  contentItem ContentItem  @relation(fields: [contentId], references: [id])
+  parent      Comment?     @relation("CommentThread", fields: [parentId], references: [id])
+  children    Comment[]    @relation("CommentThread")
+  events      CommentEvent[]
+
+  @@index([status])
+  @@map("comments")
+}
+
+/// Comment moderation events for auditability.
+model CommentEvent {
+  id         String   @id @default(uuid())
+  commentId  String   @map("comment_id")
+  action     String
+  actorId    String?  @map("actor_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  comment Comment @relation(fields: [commentId], references: [id])
+
+  @@map("comment_events")
+}
+
+/// Site settings storage.
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     Json
+  version   Int      @default(1)
+  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("settings")
+}
+
+/// Menu container for navigation structures.
+model Menu {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  location  String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  items     MenuItem[]
+
+  @@map("menus")
+}
+
+/// Menu items for hierarchical navigation.
+model MenuItem {
+  id        String   @id @default(uuid())
+  menuId    String   @map("menu_id")
+  parentId  String?  @map("parent_id")
+  label     String
+  url       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  menu      Menu      @relation(fields: [menuId], references: [id])
+  parent    MenuItem? @relation("MenuTree", fields: [parentId], references: [id])
+  children  MenuItem[] @relation("MenuTree")
+
+  @@index([menuId])
+  @@map("menu_items")
+}
+
+/// Theme packages installed in the CMS.
+model Theme {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  version   String
+  active    Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  settings  ThemeSetting[]
+  templates Template[]
+
+  @@map("themes")
+}
+
+/// Theme-specific settings for active theme.
+model ThemeSetting {
+  id        String   @id @default(uuid())
+  themeId   String   @map("theme_id")
+  key       String
+  value     Json
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  theme     Theme @relation(fields: [themeId], references: [id])
+
+  @@unique([themeId, key])
+  @@map("theme_settings")
+}
+
+/// Templates registered by themes.
+model Template {
+  id        String   @id @default(uuid())
+  themeId   String   @map("theme_id")
+  name      String
+  slug      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  theme     Theme @relation(fields: [themeId], references: [id])
+
+  @@unique([themeId, slug])
+  @@map("templates")
+}
+
+/// Plugins installed in the CMS.
+model Plugin {
+  id        String       @id @default(uuid())
+  name      String
+  slug      String       @unique
+  version   String
+  status    PluginStatus @default(installed)
+  manifest  Json?
+  createdAt DateTime     @default(now()) @map("created_at")
+  updatedAt DateTime     @updatedAt @map("updated_at")
+
+  settings  PluginSetting[]
+
+  @@map("plugins")
+}
+
+/// Plugin-specific settings.
+model PluginSetting {
+  id        String   @id @default(uuid())
+  pluginId  String   @map("plugin_id")
+  key       String
+  value     Json
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  plugin    Plugin @relation(fields: [pluginId], references: [id])
+
+  @@unique([pluginId, key])
+  @@map("plugin_settings")
+}
+
+/// Hook registry entries for plugins.
+model HookRegistry {
+  id        String   @id @default(uuid())
+  hookName  String   @map("hook_name")
+  pluginId  String?  @map("plugin_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([hookName])
+  @@map("hook_registry")
+}
+
+/// Audit log entries for privileged actions.
+model AuditLog {
+  id          String   @id @default(uuid())
+  actorId     String?  @map("actor_id")
+  action      String
+  resource    String
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  actor User? @relation(fields: [actorId], references: [id])
+
+  @@index([resource])
+  @@map("audit_logs")
+}
+
+/// Import job tracking.
+model ImportJob {
+  id        String   @id @default(uuid())
+  status    JobStatus @default(queued)
+  source    String
+  warnings  Json?
+  errors    Json?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("import_jobs")
+}
+
+/// Export job tracking.
+model ExportJob {
+  id        String   @id @default(uuid())
+  status    JobStatus @default(queued)
+  target    String
+  warnings  Json?
+  errors    Json?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("export_jobs")
+}
+
+/// Privacy request workflow records.
+model PrivacyRequest {
+  id        String   @id @default(uuid())
+  email     String
+  type      String
+  status    JobStatus @default(queued)
+  result    Json?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("privacy_requests")
+}
+
+/// Job runs for background tasks.
+model JobRun {
+  id        String   @id @default(uuid())
+  jobType   String   @map("job_type")
+  status    JobStatus @default(queued)
+  details   Json?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("job_runs")
+}
+
+/// Health report snapshots for admin dashboard.
+model HealthReport {
+  id        String   @id @default(uuid())
+  status    String
+  details   Json
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("health_reports")
+}

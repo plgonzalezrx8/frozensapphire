@@ -1,8 +1,30 @@
 # frozensapphire
 
-**frozensapphire** is a modular CMS designed for Next.js, inspired by the flexibility and extensibility of WordPress.
+**frozensapphire** is a modular CMS built on Next.js, inspired by the flexibility and extensibility of WordPress core.
 
-It aims to provide a plugin-friendly architecture, customizable content models, and a modern developer experience for building and managing content-driven websites.
+## Quick start
+
+1. `pnpm install`
+2. `cp .env.example .env`
+3. `docker-compose up -d`
+4. `pnpm prisma:generate`
+5. `pnpm prisma:migrate`
+6. `pnpm dev`
+
+Open `http://localhost:3000` for the public site and `http://localhost:3000/admin` for the admin shell.
+
+## Development notes
+
+- Prisma and Argon2 require `pnpm approve-builds` to enable native build scripts.
+- The REST API is mounted under `/api/v1`.
+- Health endpoints: `/api/v1/health` and `/api/v1/health/report`.
+
+## Testing
+
+- Unit/integration tests: `pnpm test`
+- CI test run with coverage: `pnpm test:ci`
+- Type checking: `pnpm typecheck`
+- Linting: `pnpm lint`
 
 ## Planning documents
 
