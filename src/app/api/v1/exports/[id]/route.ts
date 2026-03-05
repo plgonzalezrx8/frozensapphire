@@ -5,11 +5,12 @@ import { jsonNotImplemented } from "@/lib/api/responses";
 
 interface RouteContext {
   /** Dynamic route params from Next.js. */
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function GET(_request: Request, { params }: RouteContext) {
+  const { id } = await params;
   return jsonNotImplemented(
-    `Retrieving export job ${params.id} is not implemented yet.`,
+    `Retrieving export job ${id} is not implemented yet.`,
   );
 }

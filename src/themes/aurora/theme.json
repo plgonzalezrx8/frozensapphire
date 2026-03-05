@@ -1,0 +1,12 @@
+{
+  "name": "Aurora",
+  "slug": "aurora",
+  "version": "0.1.0",
+  "templates": ["index", "page", "single", "archive"],
+  "menuLocations": ["primary", "footer"],
+  "tokens": {
+    "background": "#ffffff",
+    "foreground": "#0f172a",
+    "accent": "#0ea5e9"
+  }
+}

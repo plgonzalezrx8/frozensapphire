@@ -1,0 +1,8 @@
+{
+  "name": "Hello World",
+  "slug": "hello-world",
+  "version": "0.1.0",
+  "author": "frozensapphire",
+  "description": "Example plugin that registers a simple hook.",
+  "entry": "index.ts"
+}

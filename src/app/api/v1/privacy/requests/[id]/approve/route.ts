@@ -5,11 +5,12 @@ import { jsonNotImplemented } from "@/lib/api/responses";
 
 interface RouteContext {
   /** Dynamic route params from Next.js. */
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function POST(_request: Request, { params }: RouteContext) {
+  const { id } = await params;
   return jsonNotImplemented(
-    `Approving privacy request ${params.id} is not implemented yet.`,
+    `Approving privacy request ${id} is not implemented yet.`,
   );
 }

@@ -1,14 +1,31 @@
 /**
- * Admin content list placeholder.
+ * Admin content management page.
  */
+import ContentManager from "@/app/(admin)/admin/content/ContentManager";
+import { prisma } from "@/lib/db";
 
-export default function AdminContentPage() {
-  return (
-    <section className="space-y-3">
-      <h2 className="text-2xl font-semibold text-white">Content</h2>
-      <p className="text-sm text-slate-300">
-        Content management UI will land here once CRUD flows are implemented.
-      </p>
-    </section>
-  );
+export default async function AdminContentPage() {
+  const [initialItems, initialTypes] = await Promise.all([
+    prisma.contentItem.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 20,
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        status: true,
+        typeId: true,
+      },
+    }),
+    prisma.contentType.findMany({
+      orderBy: { name: "asc" },
+      select: {
+        id: true,
+        name: true,
+        slug: true,
+      },
+    }),
+  ]);
+
+  return <ContentManager initialItems={initialItems} initialTypes={initialTypes} />;
 }

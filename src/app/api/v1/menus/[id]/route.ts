@@ -5,13 +5,15 @@ import { jsonNotImplemented } from "@/lib/api/responses";
 
 interface RouteContext {
   /** Dynamic route params from Next.js. */
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function PATCH(_request: Request, { params }: RouteContext) {
-  return jsonNotImplemented(`Updating menu ${params.id} is not implemented yet.`);
+  const { id } = await params;
+  return jsonNotImplemented(`Updating menu ${id} is not implemented yet.`);
 }
 
 export async function DELETE(_request: Request, { params }: RouteContext) {
-  return jsonNotImplemented(`Deleting menu ${params.id} is not implemented yet.`);
+  const { id } = await params;
+  return jsonNotImplemented(`Deleting menu ${id} is not implemented yet.`);
 }

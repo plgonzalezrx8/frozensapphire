@@ -2,6 +2,7 @@
  * Seeds default roles and capabilities for frozensapphire.
  * Run via `pnpm prisma db seed` once Prisma seeding is configured.
  */
+import argon2 from "argon2";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -54,6 +55,48 @@ const roles = [
   },
 ];
 
+const defaultContentTypes = [
+  {
+    name: "Post",
+    slug: "post",
+    schema: {
+      title: "string",
+      content: "json",
+    },
+  },
+  {
+    name: "Page",
+    slug: "page",
+    schema: {
+      title: "string",
+      content: "json",
+    },
+  },
+];
+
+const demoUsers = [
+  {
+    email: "admin@frozensapphire.local",
+    name: "Admin User",
+    role: "Administrator",
+  },
+  {
+    email: "editor@frozensapphire.local",
+    name: "Editor User",
+    role: "Editor",
+  },
+  {
+    email: "author@frozensapphire.local",
+    name: "Author User",
+    role: "Author",
+  },
+  {
+    email: "contributor@frozensapphire.local",
+    name: "Contributor User",
+    role: "Contributor",
+  },
+];
+
 async function main() {
   for (const capability of capabilities) {
     await prisma.capability.upsert({
@@ -93,6 +136,56 @@ async function main() {
         },
       });
     }
+  }
+
+  for (const contentType of defaultContentTypes) {
+    await prisma.contentType.upsert({
+      where: { slug: contentType.slug },
+      update: {
+        name: contentType.name,
+        schema: contentType.schema,
+      },
+      create: contentType,
+    });
+  }
+
+  const defaultPasswordHash = await argon2.hash("ChangeMe123!");
+
+  for (const demoUser of demoUsers) {
+    const user = await prisma.user.upsert({
+      where: { email: demoUser.email },
+      update: {
+        name: demoUser.name,
+        passwordHash: defaultPasswordHash,
+      },
+      create: {
+        email: demoUser.email,
+        name: demoUser.name,
+        passwordHash: defaultPasswordHash,
+      },
+    });
+
+    const role = await prisma.role.findUnique({
+      where: { name: demoUser.role },
+    });
+
+    if (!role) {
+      continue;
+    }
+
+    await prisma.userRole.upsert({
+      where: {
+        userId_roleId: {
+          userId: user.id,
+          roleId: role.id,
+        },
+      },
+      update: {},
+      create: {
+        userId: user.id,
+        roleId: role.id,
+      },
+    });
   }
 }
 

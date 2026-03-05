@@ -5,13 +5,15 @@ import { jsonNotImplemented } from "@/lib/api/responses";
 
 interface RouteContext {
   /** Dynamic route params from Next.js. */
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function GET(_request: Request, { params }: RouteContext) {
-  return jsonNotImplemented(`Retrieving media asset ${params.id} is not implemented yet.`);
+  const { id } = await params;
+  return jsonNotImplemented(`Retrieving media asset ${id} is not implemented yet.`);
 }
 
 export async function PATCH(_request: Request, { params }: RouteContext) {
-  return jsonNotImplemented(`Updating media asset ${params.id} is not implemented yet.`);
+  const { id } = await params;
+  return jsonNotImplemented(`Updating media asset ${id} is not implemented yet.`);
 }

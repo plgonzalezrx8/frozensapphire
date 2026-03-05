@@ -4,6 +4,9 @@
  */
 import type { ReactNode } from "react";
 import Link from "next/link";
+import AdminSignOutButton from "@/app/(admin)/AdminSignOutButton";
+
+export const dynamic = "force-dynamic";
 
 interface AdminLayoutProps {
   /** Child routes rendered within the admin layout. */
@@ -41,9 +44,14 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </nav>
         </aside>
 
-        <main className="flex-1 rounded-3xl bg-white/5 p-8 shadow-xl shadow-black/20">
-          {children}
-        </main>
+        <section className="flex-1 space-y-4">
+          <div className="flex justify-end">
+            <AdminSignOutButton />
+          </div>
+          <main className="rounded-3xl bg-white/5 p-8 shadow-xl shadow-black/20">
+            {children}
+          </main>
+        </section>
       </div>
     </div>
   );
