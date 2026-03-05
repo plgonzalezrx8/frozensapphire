@@ -8,3 +8,5 @@ It aims to provide a plugin-friendly architecture, customizable content models, 
 
 - [WordPress Core vs Next.js CMS Implementation Matrix](docs/wordpress-core-parity-matrix.md)
 - [Technical Requirements Document (TRD)](docs/technical-requirements-document.md)
+- [Implementation Plan](docs/implementation-plan.md)
+- [MVP Execution Checklist](docs/mvp-execution-checklist.md)
