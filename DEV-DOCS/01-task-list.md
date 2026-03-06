@@ -1,22 +1,30 @@
 # 01 - Task List
 
-**Last Updated:** March 5, 2026  
+**Last Updated:** March 6, 2026
 **Status:** Draft
 
 ## Purpose
 
-Track the immediate execution backlog for the next sprint.
+Provide a thin local pointer to the active Linear issue queue.
 
 ## Current State
 
-Foundation scaffold is in place; core CMS functionality is not implemented.
+Foundation scaffold is in place and Milestone 1 hardening is active on `development`.
 
-## Next Tasks (Short List)
+- Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
 
-- Implement Auth.js credentials flow and session handling.
-- Add RBAC guards and default role seeding.
-- Wire admin routes behind auth.
-- Implement content type and content item CRUD.
-- Add initial public rendering for posts/pages.
-- Add REST API v1 baseline for content entities.
+## Current Issue Snapshot
 
+### In Progress
+
+- [BLU-39 — Stabilize auth and RBAC behavior](https://linear.app/blueforce-innovations/issue/BLU-39/stabilize-auth-and-rbac-behavior)
+
+### Todo
+
+- [BLU-40 — Expand content CRUD tests and edge-case coverage](https://linear.app/blueforce-innovations/issue/BLU-40/expand-content-crud-tests-and-edge-case-coverage)
+- [BLU-41 — Add auth and RBAC audit event coverage](https://linear.app/blueforce-innovations/issue/BLU-41/add-auth-and-rbac-audit-event-coverage)
+
+### Near-Term Backlog
+
+- [BLU-42 — Complete content-core CRUD and public rendering baseline](https://linear.app/blueforce-innovations/issue/BLU-42/complete-content-core-crud-and-public-rendering-baseline)
+- [BLU-43 — Implement the Tiptap editor and media upload pipeline](https://linear.app/blueforce-innovations/issue/BLU-43/implement-the-tiptap-editor-and-media-upload-pipeline)

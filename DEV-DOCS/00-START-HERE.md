@@ -1,15 +1,23 @@
 # 00 - Start Here
 
-**Last Updated:** March 5, 2026  
-**Status:** Draft
+**Last Updated:** March 6, 2026
+**Status:** In Progress
 
 ## Purpose
 
-Provide a short onboarding path for contributors.
+Provide a short onboarding path for contributors while delegating live planning state to Linear.
 
 ## Current State
 
 The project has a working baseline: scaffolded Next.js app, Prisma schema, CI/testing harness, credentials auth, RBAC guards, and first content CRUD APIs/UI.
+
+- Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
+- Current phase: Milestone 1 in progress (auth, RBAC, and first content CRUD hardening)
+- Primary active issue: [BLU-39 — Stabilize auth and RBAC behavior](https://linear.app/blueforce-innovations/issue/BLU-39/stabilize-auth-and-rbac-behavior)
+- Immediate next issues:
+  - [BLU-40 — Expand content CRUD tests and edge-case coverage](https://linear.app/blueforce-innovations/issue/BLU-40/expand-content-crud-tests-and-edge-case-coverage)
+  - [BLU-41 — Add auth and RBAC audit event coverage](https://linear.app/blueforce-innovations/issue/BLU-41/add-auth-and-rbac-audit-event-coverage)
+- Current blocker: none active.
 
 ## Getting Started
 
@@ -26,4 +34,4 @@ The project has a working baseline: scaffolded Next.js app, Prisma schema, CI/te
 - Coding standards: `DEV-DOCS/CODING-STANDARDS.md`
 - Branch workflow: `DEV-DOCS/GIT-WORKFLOW.md`
 - Requirements: `DEV-DOCS/requirements/TECHNICAL-REQUIREMENTS.md`
-- Roadmap: `DEV-DOCS/ROADMAP.md`
+- Roadmap intent: `DEV-DOCS/ROADMAP.md`

@@ -1,7 +1,9 @@
 # Roadmap
 
-**Last Updated:** March 5, 2026  
-**Status:** Draft
+**Last Updated:** March 6, 2026
+**Status:** In Progress
+
+> Linear is the single source of truth for live planning state: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac). This file is roadmap intent and milestone-definition reference only.
 
 ## Purpose
 

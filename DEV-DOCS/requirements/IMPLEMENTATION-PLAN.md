@@ -1,7 +1,9 @@
 # Implementation Plan
 
-**Last Updated:** March 5, 2026  
+**Last Updated:** March 6, 2026
 **Status:** Draft
+
+> Linear is the single source of truth for live planning state: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac). This file preserves milestone definitions, exit criteria, and delivery strategy.
 
 ## Purpose
 

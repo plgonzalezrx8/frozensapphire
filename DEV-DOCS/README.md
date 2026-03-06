@@ -1,9 +1,14 @@
 # DEV-DOCS - Developer Documentation (frozensapphire)
 
-**Last Updated:** March 5, 2026  
-**Status:** Draft
+**Last Updated:** March 6, 2026
+**Status:** In Progress
 
-This folder is the canonical home for frozensapphire development documentation, requirements, and roadmap planning.
+Linear is the single source of truth for frozensapphire planning:
+
+- Project board: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
+- Canonical planning state: milestones, issue status, next work, and backlog
+
+This folder remains the canonical home for frozensapphire development documentation, requirements, architecture, standards, and work-log history.
 
 ## Folder Structure
 
@@ -53,7 +58,8 @@ DEV-DOCS/
 3. Coding and commenting standards: `DEV-DOCS/CODING-STANDARDS.md`
 4. Requirements and scope: `DEV-DOCS/requirements/TECHNICAL-REQUIREMENTS.md`
 5. Branching and release workflow: `DEV-DOCS/GIT-WORKFLOW.md`
-6. Roadmap and current status: `DEV-DOCS/ROADMAP.md` and `DEV-DOCS/DEVELOPMENT-STATUS.md`
+6. Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
+7. Roadmap intent and current repo-local snapshot: `DEV-DOCS/ROADMAP.md` and `DEV-DOCS/DEVELOPMENT-STATUS.md`
 
 ## Current State Snapshot
 
@@ -61,7 +67,7 @@ DEV-DOCS/
 - Auth baseline implemented with credentials login and middleware-protected admin routes.
 - RBAC capability checks are enforced for protected content APIs.
 - Initial content CRUD vertical slice is implemented and tested.
-- CI gates now include lint, typecheck, unit, integration, build, and comment-policy checks.
+- CI gates now include comment policy, lint, typecheck, unit tests, integration tests, and build.
 
 ## Documentation Standards
 

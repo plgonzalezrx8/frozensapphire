@@ -39,7 +39,11 @@ After running seed (`pnpm prisma db seed`), demo users are available with passwo
 
 ## Planning documents
 
-The canonical planning docs now live under `DEV-DOCS/requirements/`:
+Linear is now the single source of truth for live planning state:
+
+- [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
+
+Strategy and requirements references remain under `DEV-DOCS/requirements/`:
 
 - [WordPress Core vs Next.js CMS Implementation Matrix](DEV-DOCS/requirements/WP-PARITY-MATRIX.md)
 - [Technical Requirements Document (TRD)](DEV-DOCS/requirements/TECHNICAL-REQUIREMENTS.md)
