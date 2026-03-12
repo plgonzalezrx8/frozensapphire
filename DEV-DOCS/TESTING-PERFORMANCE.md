@@ -1,7 +1,7 @@
 # Testing and Performance
 
-**Last Updated:** March 5, 2026  
-**Status:** Draft
+**Last Updated:** March 11, 2026
+**Status:** In Progress
 
 ## Purpose
 
@@ -9,7 +9,7 @@ Define test strategy and performance goals.
 
 ## Current State
 
-Vitest is configured with unit tests; E2E is not yet added.
+Vitest covers unit and integration tests. Playwright E2E is part of the platform-distribution lane and must become a required PR gate for `development`.
 
 ## Testing Plan
 
@@ -24,7 +24,9 @@ Vitest is configured with unit tests; E2E is not yet added.
 - `pnpm comments:check`
 - `pnpm test:unit`
 - `pnpm test:integration`
+- `pnpm test:e2e`
 - `pnpm build`
+- CodeQL workflow
 
 ## Performance Goals
 

@@ -73,6 +73,7 @@ DEV-DOCS/
 - Initial content CRUD vertical slice is implemented and tested.
 - CI gates now include comment policy, lint, typecheck, unit tests, integration tests, and build.
 - Self-hosted product packaging and worktree-lane delivery model are now the authoritative execution direction.
+- Playwright E2E, commit policy enforcement, and security workflow coverage are part of the active platform-distribution lane.
 
 ## Documentation Standards
 

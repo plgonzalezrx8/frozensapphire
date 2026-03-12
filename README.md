@@ -66,10 +66,12 @@ Manual Node deployment:
 
 - Unit tests: `pnpm test:unit`
 - Integration tests: `pnpm test:integration`
+- End-to-end tests: `pnpm test:e2e`
 - Combined CI test run: `pnpm test:ci`
 - Type checking: `pnpm typecheck`
 - Linting: `pnpm lint`
 - Comment policy check: `pnpm comments:check`
+- Commit policy check: `pnpm commitlint`
 
 ## Planning documents
 

@@ -35,7 +35,9 @@ Merges into `development` and `master` require passing checks:
 - `pnpm comments:check`
 - `pnpm lint`
 - `pnpm typecheck`
-- `pnpm test:ci`
+- `pnpm test:unit`
+- `pnpm test:integration`
+- `pnpm test:e2e`
 - `pnpm build`
 
 ## Release Cadence Guidance
