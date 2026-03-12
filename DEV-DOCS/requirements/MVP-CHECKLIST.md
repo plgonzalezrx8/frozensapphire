@@ -1,7 +1,7 @@
 # MVP Execution Checklist
 
-**Last Updated:** March 5, 2026  
-**Status:** Draft
+**Last Updated:** March 11, 2026
+**Status:** In Progress
 
 ## Purpose
 
@@ -16,8 +16,12 @@ Use this list to track implementation progress against TRD MVP scope.
 ## Foundation
 - [ ] Next.js App Router scaffolded (TypeScript, lint, format)
 - [ ] Prisma configured with PostgreSQL
+- [ ] Checked-in Prisma migrations created
+- [ ] Deterministic seed profiles added (`seed:dev`, `seed:test`, `seed:e2e`)
 - [ ] Redis configured for queues/cache
 - [ ] MinIO configured for local S3-compatible storage
+- [ ] Docker-first self-hosting install path documented
+- [ ] Manual Node deployment path documented
 - [ ] CI runs lint + typecheck + tests
 
 ## Auth and Authorization
@@ -55,6 +59,7 @@ Use this list to track implementation progress against TRD MVP scope.
 - [ ] Health dashboard checks
 - [ ] Import/export jobs (JSON)
 - [ ] Privacy tools (export + erasure requests)
+- [ ] Release artifacts and upgrade notes documented
 
 ## Quality Gates
 - [ ] Unit tests for domain logic

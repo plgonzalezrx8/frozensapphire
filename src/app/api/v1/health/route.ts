@@ -1,20 +1,18 @@
 /**
  * Health endpoint for API consumers and uptime checks.
- * Expands to include DB/Redis/S3 checks as services are wired.
+ * Returns a summarized report for runtime readiness and uptime checks.
  */
 import { jsonOk } from "@/lib/api/responses";
+import { getHealthReport } from "@/modules/health/healthService";
 
 export async function GET() {
-  const now = new Date().toISOString();
+  const report = getHealthReport();
 
   return jsonOk({
-    status: "ok",
-    time: now,
-    services: {
-      database: "unknown",
-      cache: "unknown",
-      storage: "unknown",
-      queue: "unknown",
-    },
+    status: report.status,
+    time: new Date().toISOString(),
+    services: Object.fromEntries(
+      report.checks.map((check) => [check.name, check.status]),
+    ),
   });
 }

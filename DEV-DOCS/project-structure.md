@@ -1,7 +1,7 @@
 # Project Structure
 
-**Last Updated:** March 5, 2026  
-**Status:** Draft
+**Last Updated:** March 11, 2026
+**Status:** In Progress
 
 ## Purpose
 
@@ -21,4 +21,7 @@ The repo includes App Router routes, Prisma schema, and modules for hooks, healt
 - `src/plugins` — Bundled plugin packages
 - `src/themes` — Bundled theme packages
 - `prisma/schema.prisma` — Database schema
-
+- `Dockerfile` — Self-hosted application image build
+- `docker-compose.yml` — Local development service stack
+- `docker-compose.selfhost.yml` — Packaged self-hosting stack
+- `scripts/selfhost` — Runtime validation and container startup helpers

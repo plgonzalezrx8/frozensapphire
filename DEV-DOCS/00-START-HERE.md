@@ -1,6 +1,6 @@
 # 00 - Start Here
 
-**Last Updated:** March 6, 2026
+**Last Updated:** March 11, 2026
 **Status:** In Progress
 
 ## Purpose
@@ -9,7 +9,7 @@ Provide a short onboarding path for contributors while delegating live planning 
 
 ## Current State
 
-The project has a working baseline: scaffolded Next.js app, Prisma schema, CI/testing harness, credentials auth, RBAC guards, and first content CRUD APIs/UI.
+The project has a working baseline: scaffolded Next.js app, Prisma schema, CI/testing harness, credentials auth, RBAC guards, first content CRUD APIs/UI, and a self-hosted distribution direction.
 
 - Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
 - Current phase: Milestone 1 in progress (auth, RBAC, and first content CRUD hardening)
@@ -26,12 +26,14 @@ The project has a working baseline: scaffolded Next.js app, Prisma schema, CI/te
 3. Start local services: `docker-compose up -d`
 4. Generate Prisma client: `pnpm prisma:generate`
 5. Apply migrations: `pnpm prisma:migrate`
-6. Run dev server: `pnpm dev`
+6. Seed local data: `pnpm seed:dev`
+7. Run dev server: `pnpm dev`
 
 ## What to Read Next
 
 - Architecture: `DEV-DOCS/ARCHITECTURE.md`
 - Coding standards: `DEV-DOCS/CODING-STANDARDS.md`
 - Branch workflow: `DEV-DOCS/GIT-WORKFLOW.md`
+- Self-hosting model: `DEV-DOCS/SELF-HOSTING.md`
 - Requirements: `DEV-DOCS/requirements/TECHNICAL-REQUIREMENTS.md`
 - Roadmap intent: `DEV-DOCS/ROADMAP.md`

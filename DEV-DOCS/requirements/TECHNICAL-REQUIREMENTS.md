@@ -1,15 +1,15 @@
 # Technical Requirements Document (TRD)
 
-**Last Updated:** March 5, 2026  
-**Status:** Draft
+**Last Updated:** March 11, 2026
+**Status:** In Progress
 
 ## Purpose
 
-Define the functional and non-functional requirements for the frozensapphire CMS.
+Define the functional and non-functional requirements for the self-hosted `frozensapphire` CMS package.
 
 ## Current State
 
-Requirements are approved; implementation is in progress and incomplete.
+Requirements are approved; implementation is in progress and incomplete. The product direction is self-hosted and distributable, not hosted SaaS.
 
 ## Project: frozensapphire (Next.js CMS with WordPress-core-like capabilities)
 
@@ -40,7 +40,7 @@ Build a modular CMS in Next.js that delivers baseline parity with **vanilla Word
 ## 3. Non-Functional Requirements
 - **Performance**: P95 admin read endpoints under 300ms for datasets <= 100k content records (indexed queries)
 - **Scalability**: Horizontally scalable stateless app tier
-- **Availability**: 99.9% monthly target for managed deployment
+- **Availability**: 99.9% monthly target for supported self-hosted deployments
 - **Security**: OWASP ASVS-aligned controls for authz, session management, and input validation
 - **Auditability**: Sensitive actions logged with actor, timestamp, and resource
 - **Accessibility**: Admin UI WCAG 2.1 AA baseline
@@ -52,12 +52,18 @@ Build a modular CMS in Next.js that delivers baseline parity with **vanilla Word
 - Next.js (App Router) + TypeScript
 - Server components for read-heavy admin/public views
 - Route handlers for REST endpoints
+- Docker-first distribution plus manual Node deployment support
 
 ### 4.2 Data and Persistence
 - PostgreSQL as primary relational store
 - Prisma ORM and migrations
 - Redis for queue and cache needs
 - S3-compatible object store for media binaries
+
+### 4.5 Distribution Model
+- The product shall be installable on customer-controlled infrastructure.
+- Hosted vendor services are optional for development and CI only.
+- Runtime configuration shall use generic environment variables and infrastructure contracts.
 
 ### 4.3 Async Processing
 - Queue workers for scheduled publish, import/export jobs, privacy requests, and media transforms

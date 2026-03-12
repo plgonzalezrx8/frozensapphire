@@ -18,6 +18,8 @@ DEV-DOCS/
 ├── 00-START-HERE.md
 ├── 01-task-list.md
 ├── GIT-WORKFLOW.md
+├── SELF-HOSTING.md
+├── WORKTREE-LANES.md
 ├── ARCHITECTURE.md
 ├── CODING-STANDARDS.md
 ├── SECURITY-GUIDELINES.md
@@ -58,8 +60,10 @@ DEV-DOCS/
 3. Coding and commenting standards: `DEV-DOCS/CODING-STANDARDS.md`
 4. Requirements and scope: `DEV-DOCS/requirements/TECHNICAL-REQUIREMENTS.md`
 5. Branching and release workflow: `DEV-DOCS/GIT-WORKFLOW.md`
-6. Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
-7. Roadmap intent and current repo-local snapshot: `DEV-DOCS/ROADMAP.md` and `DEV-DOCS/DEVELOPMENT-STATUS.md`
+6. Self-hosting model: `DEV-DOCS/SELF-HOSTING.md`
+7. Worktree lane map: `DEV-DOCS/WORKTREE-LANES.md`
+8. Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
+9. Roadmap intent and current repo-local snapshot: `DEV-DOCS/ROADMAP.md` and `DEV-DOCS/DEVELOPMENT-STATUS.md`
 
 ## Current State Snapshot
 
@@ -68,6 +72,8 @@ DEV-DOCS/
 - RBAC capability checks are enforced for protected content APIs.
 - Initial content CRUD vertical slice is implemented and tested.
 - CI gates now include comment policy, lint, typecheck, unit tests, integration tests, and build.
+- Self-hosted product packaging and worktree-lane delivery model are now the authoritative execution direction.
+- Playwright E2E, commit policy enforcement, and security workflow coverage are part of the active platform-distribution lane.
 
 ## Documentation Standards
 
