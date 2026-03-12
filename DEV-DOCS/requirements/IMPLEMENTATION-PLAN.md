@@ -1,7 +1,7 @@
 # Implementation Plan
 
-**Last Updated:** March 6, 2026
-**Status:** Draft
+**Last Updated:** March 11, 2026
+**Status:** In Progress
 
 > Linear is the single source of truth for live planning state: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac). This file preserves milestone definitions, exit criteria, and delivery strategy.
 
@@ -24,12 +24,17 @@ This document translates the TRD and parity matrix into an execution plan with l
 - **Tenancy:** Single-tenant schema for MVP
 - **Scope:** Follow TRD MVP scope (includes import/export, privacy tools, and site health)
 - **Plugins:** In-process hooks for MVP; sandbox later
+- **Distribution:** Self-hosted package, not a hosted SaaS
+- **Install paths:** Docker-first plus manual Node deployment
+- **Auth:** Local Auth.js credentials/session auth
+- **Infra contract:** Generic Postgres, Redis, and S3-compatible storage
 
 ## 2) Delivery Strategy
 
 - Build in **vertical slices** (auth → content → media → publishing → comments) to keep milestones shippable.
 - Keep MVP scope aligned to **P0 parity targets** plus TRD MVP items.
 - Defer P1/P2 unless they unblock P0 delivery.
+- Use worktree lanes to isolate parallel delivery for platform, content, editor/media, site structure, discussion/API, and ops/release.
 
 ## 3) Milestones and Exit Criteria
 
@@ -42,10 +47,12 @@ This document translates the TRD and parity matrix into an execution plan with l
 - Redis + MinIO local stack via docker-compose.
 - Health endpoint (`/api/v1/health`).
 - CI pipeline for lint/typecheck/tests.
+- Self-hosted packaging baseline (Docker/manual install documentation and runtime contract).
 
 **Exit criteria**
 - App runs locally and responds to `/api/v1/health`.
 - Prisma migrations execute successfully in dev.
+- A new user can start the stack with documented self-hosting instructions.
 
 ### Milestone 1 — Auth, RBAC, Audit, Admin Shell
 **Goal:** Secure admin access and role-based authorization.

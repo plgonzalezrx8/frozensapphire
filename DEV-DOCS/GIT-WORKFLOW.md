@@ -1,6 +1,6 @@
 # Git Workflow
 
-**Last Updated:** March 5, 2026  
+**Last Updated:** March 11, 2026
 **Status:** Active
 
 ## Purpose
@@ -22,10 +22,11 @@ All other branches are short-lived and must be deleted after merge.
 2. Use short-lived branch names:
    - `feature/<short-description>`
    - `sprint/<short-description>`
-3. Open PRs from short-lived branches into `development`.
-4. Validate in `development`.
-5. Promote by merging `development` into `master`.
-6. Delete merged short-lived branches locally and remotely.
+3. Use dedicated worktrees for parallel execution lanes where practical.
+4. Open PRs from short-lived branches into `development`.
+5. Validate in `development`.
+6. Promote by merging `development` into `master`.
+7. Delete merged short-lived branches locally and remotely.
 
 ## CI/CD Gate Requirements
 

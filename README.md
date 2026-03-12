@@ -2,6 +2,8 @@
 
 **frozensapphire** is a modular CMS built on Next.js, inspired by the flexibility and extensibility of WordPress core.
 
+`frozensapphire` is being built as a self-hosted, distributable package. Customers should be able to run it on their own infrastructure the way they run WordPress today.
+
 ## Quick start
 
 1. `pnpm install`
@@ -12,6 +14,17 @@
 6. `pnpm dev`
 
 Open `http://localhost:3000` for the public site and `http://localhost:3000/admin` for the admin shell.
+
+## Self-hosting model
+
+The MVP product model is self-hosted, not SaaS:
+
+- Docker-first install via `docker-compose`
+- Manual Node deployment with documented prerequisites
+- Generic `Postgres`, `Redis`, and `S3-compatible` storage
+- Local `Auth.js` credentials/session auth backed by Prisma
+
+Hosted services such as Vercel, Neon, and Infisical may still be used for internal development convenience, but they are not product requirements.
 
 ## Authentication
 
@@ -55,6 +68,8 @@ Strategy and requirements references remain under `DEV-DOCS/requirements/`:
 Developer documentation lives in `DEV-DOCS/`. Start here:
 
 - [DEV-DOCS Overview](DEV-DOCS/README.md)
+- [Self-Hosting Model](DEV-DOCS/SELF-HOSTING.md)
+- [Worktree Lane Map](DEV-DOCS/WORKTREE-LANES.md)
 
 ## Git Branching Strategy
 
