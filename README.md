@@ -8,7 +8,7 @@
 
 1. `pnpm install`
 2. `cp .env.example .env`
-3. `docker-compose up -d`
+3. `docker compose up -d`
 4. `pnpm prisma:generate`
 5. `pnpm prisma:migrate`
 6. `pnpm seed:dev`
@@ -20,7 +20,7 @@ Open `http://localhost:3000` for the public site and `http://localhost:3000/admi
 
 The MVP product model is self-hosted, not SaaS:
 
-- Docker-first install via `docker-compose`
+- Docker-first install via `docker compose`
 - Manual Node deployment with documented prerequisites
 - Generic `Postgres`, `Redis`, and `S3-compatible` storage
 - Local `Auth.js` credentials/session auth backed by Prisma
@@ -39,7 +39,7 @@ After running `pnpm seed:dev`, demo users are available with password `ChangeMe1
 
 ## Development notes
 
-- Prisma and Argon2 require `pnpm approve-builds` to enable native build scripts.
+- Required native build dependencies are allow-listed in `pnpm-workspace.yaml` so `pnpm install` can build Prisma, Argon2, and related tooling without a manual approval step.
 - The REST API is mounted under `/api/v1`.
 - Health endpoints: `/api/v1/health` and `/api/v1/health/report`.
 
@@ -67,6 +67,7 @@ Manual Node deployment:
 - Unit tests: `pnpm test:unit`
 - Integration tests: `pnpm test:integration`
 - End-to-end tests: `pnpm test:e2e`
+- Local E2E on a busy machine: `CI=1 PORT=4010 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4010 NEXTAUTH_URL=http://127.0.0.1:4010 pnpm test:e2e`
 - Combined CI test run: `pnpm test:ci`
 - Type checking: `pnpm typecheck`
 - Linting: `pnpm lint`
