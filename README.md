@@ -67,6 +67,7 @@ Manual Node deployment:
 - Unit tests: `pnpm test:unit`
 - Integration tests: `pnpm test:integration`
 - End-to-end tests: `pnpm test:e2e`
+- Local E2E on a busy machine: `CI=1 PORT=4010 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4010 NEXTAUTH_URL=http://127.0.0.1:4010 pnpm test:e2e`
 - Combined CI test run: `pnpm test:ci`
 - Type checking: `pnpm typecheck`
 - Linting: `pnpm lint`
