@@ -39,7 +39,7 @@ After running `pnpm seed:dev`, demo users are available with password `ChangeMe1
 
 ## Development notes
 
-- Prisma and Argon2 require `pnpm approve-builds` to enable native build scripts.
+- Required native build dependencies are allow-listed in `pnpm-workspace.yaml` so `pnpm install` can build Prisma, Argon2, and related tooling without a manual approval step.
 - The REST API is mounted under `/api/v1`.
 - Health endpoints: `/api/v1/health` and `/api/v1/health/report`.
 
