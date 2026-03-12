@@ -62,6 +62,25 @@ Optional product variables may be added later, but the MVP packaging and docs mu
 - Upgrade and rollback notes
 - Health checks that identify missing or invalid runtime dependencies
 
+## Install Paths
+
+Docker-first:
+
+1. Copy `.env.example` to `.env`
+2. Set production secrets and infrastructure endpoints
+3. Build the image
+4. Start the self-hosted compose stack
+5. Verify `/api/v1/health`
+
+Manual Node deployment:
+
+1. Provision Node 20+, Postgres, Redis, and S3-compatible storage
+2. Export the documented runtime environment variables
+3. Install dependencies and generate Prisma client
+4. Run `prisma migrate deploy`
+5. Run `pnpm seed:dev` or an environment-specific seed profile
+6. Build and start the application
+
 ## References
 
 - [README.md](/Users/pedrogonzalez/CascadeProjects/frozensapphire-worktrees/wt-platform-dist/README.md)

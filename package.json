@@ -13,6 +13,13 @@
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:ci": "pnpm test:unit && pnpm test:integration",
     "comments:check": "node scripts/comments-check.mjs",
+    "seed:dev": "tsx prisma/seeds/dev-run.ts",
+    "seed:test": "tsx prisma/seeds/test-run.ts",
+    "seed:e2e": "tsx prisma/seeds/e2e-run.ts",
+    "env:check": "node scripts/selfhost/validate-runtime.mjs",
+    "docker:build": "docker build -t frozensapphire:local .",
+    "docker:selfhost:up": "docker compose -f docker-compose.selfhost.yml up -d --build",
+    "docker:selfhost:down": "docker compose -f docker-compose.selfhost.yml down",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
@@ -49,6 +56,6 @@
     "vitest": "^2.1.0"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "pnpm seed:dev"
   }
 }

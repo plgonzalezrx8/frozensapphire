@@ -11,7 +11,8 @@
 3. `docker-compose up -d`
 4. `pnpm prisma:generate`
 5. `pnpm prisma:migrate`
-6. `pnpm dev`
+6. `pnpm seed:dev`
+7. `pnpm dev`
 
 Open `http://localhost:3000` for the public site and `http://localhost:3000/admin` for the admin shell.
 
@@ -28,11 +29,12 @@ Hosted services such as Vercel, Neon, and Infisical may still be used for intern
 
 ## Authentication
 
-After running seed (`pnpm prisma db seed`), demo users are available with password `ChangeMe123!`:
+After running `pnpm seed:dev`, demo users are available with password `ChangeMe123!`:
 
 - `admin@frozensapphire.local`
 - `editor@frozensapphire.local`
 - `author@frozensapphire.local`
+- `author2@frozensapphire.local`
 - `contributor@frozensapphire.local`
 
 ## Development notes
@@ -40,6 +42,25 @@ After running seed (`pnpm prisma db seed`), demo users are available with passwo
 - Prisma and Argon2 require `pnpm approve-builds` to enable native build scripts.
 - The REST API is mounted under `/api/v1`.
 - Health endpoints: `/api/v1/health` and `/api/v1/health/report`.
+
+## Self-hosted install paths
+
+Docker-first install:
+
+1. `cp .env.example .env`
+2. Update secrets and infrastructure URLs in `.env`
+3. `pnpm docker:build`
+4. `pnpm docker:selfhost:up`
+
+Manual Node deployment:
+
+1. Install Node 20+, pnpm, Postgres, Redis, and S3-compatible storage
+2. Configure the variables documented in `.env.example`
+3. `pnpm install --frozen-lockfile`
+4. `pnpm prisma:generate`
+5. `pnpm prisma migrate deploy`
+6. `pnpm seed:dev`
+7. `pnpm build && pnpm start`
 
 ## Testing
 
