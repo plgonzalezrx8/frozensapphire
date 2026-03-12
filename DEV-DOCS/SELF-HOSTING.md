@@ -1,6 +1,6 @@
 # Self-Hosting Model
 
-**Last Updated:** March 11, 2026
+**Last Updated:** March 12, 2026
 **Status:** In Progress
 
 ## Purpose
@@ -9,7 +9,7 @@ Define the official MVP distribution and hosting model for `frozensapphire`.
 
 ## Current State
 
-The repo currently runs as a local developer app with Docker-backed supporting services. The product direction is now locked to a self-hosted distribution model, so packaging, docs, migrations, seeds, and runtime checks must assume customer-controlled infrastructure.
+The repo now contains the first self-hosted packaging baseline: checked-in migrations, deterministic seeds, a container build, a packaged compose stack, and runtime configuration validation. Remaining work is feature completeness and release hardening, not product-direction ambiguity.
 
 ## Product Model
 
@@ -69,7 +69,7 @@ Docker-first:
 1. Copy `.env.example` to `.env`
 2. Set production secrets and infrastructure endpoints
 3. Build the image
-4. Start the self-hosted compose stack
+4. Run `pnpm docker:selfhost:up`
 5. Verify `/api/v1/health`
 
 Manual Node deployment:
@@ -83,6 +83,6 @@ Manual Node deployment:
 
 ## References
 
-- [README.md](/Users/pedrogonzalez/CascadeProjects/frozensapphire-worktrees/wt-platform-dist/README.md)
-- [ARCHITECTURE.md](/Users/pedrogonzalez/CascadeProjects/frozensapphire-worktrees/wt-platform-dist/DEV-DOCS/ARCHITECTURE.md)
-- [IMPLEMENTATION-PLAN.md](/Users/pedrogonzalez/CascadeProjects/frozensapphire-worktrees/wt-platform-dist/DEV-DOCS/requirements/IMPLEMENTATION-PLAN.md)
+- [README.md](/Users/pedrogonzalez/CascadeProjects/frozensapphire/README.md)
+- [ARCHITECTURE.md](/Users/pedrogonzalez/CascadeProjects/frozensapphire/DEV-DOCS/ARCHITECTURE.md)
+- [IMPLEMENTATION-PLAN.md](/Users/pedrogonzalez/CascadeProjects/frozensapphire/DEV-DOCS/requirements/IMPLEMENTATION-PLAN.md)

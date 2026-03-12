@@ -1,6 +1,6 @@
 # Roadmap
 
-**Last Updated:** March 6, 2026
+**Last Updated:** March 12, 2026
 **Status:** In Progress
 
 > Linear is the single source of truth for live planning state: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac). This file is roadmap intent and milestone-definition reference only.
@@ -13,9 +13,9 @@ Provide a milestone-based roadmap aligned with the TRD’s 16-week cadence.
 
 Foundation is complete and Milestone 1 is in progress:
 
-- Completed: scaffold, Prisma baseline, API skeleton, CI/test harness.
+- Completed: scaffold, Prisma baseline, checked-in migrations, deterministic seeds, API skeleton, CI/test harness, self-hosted packaging baseline.
 - Completed: credentials auth baseline, middleware admin protection, RBAC guard foundation.
-- In progress: first content CRUD vertical slice hardening and coverage expansion.
+- In progress: first content CRUD vertical slice hardening, auth audit coverage, and full-gate verification.
 - Not started: editor/media/taxonomies/themes/plugins/import/export/privacy.
 
 ## Milestones (16-week cadence)
@@ -23,11 +23,13 @@ Foundation is complete and Milestone 1 is in progress:
 ### Milestone 0 — Foundations (Week 1)
 - Scaffold Next.js, Prisma, CI, dev tooling
 - Health endpoints and baseline API stubs
+- Checked-in migrations, deterministic seeds, Playwright baseline, and self-hosted packaging
 **Status:** Complete
 
 **Exit criteria**
 - App runs locally
 - Prisma migrations execute in dev
+- Docker-first and manual install paths are documented
 
 ### Milestone 1 — Auth + RBAC + Admin Shell (Weeks 2–3)
 - Auth.js credentials
@@ -72,5 +74,5 @@ Foundation is complete and Milestone 1 is in progress:
 ### Milestone 8 — Hardening + Release (Post-MVP)
 - CSRF/rate limiting
 - Upload validation
-- E2E and performance tests
+- Release smoke tests and performance baselines
 **Status:** Planned

@@ -1,6 +1,6 @@
 # DEV-DOCS - Developer Documentation (frozensapphire)
 
-**Last Updated:** March 6, 2026
+**Last Updated:** March 12, 2026
 **Status:** In Progress
 
 Linear is the single source of truth for frozensapphire planning:
@@ -71,9 +71,10 @@ DEV-DOCS/
 - Auth baseline implemented with credentials login and middleware-protected admin routes.
 - RBAC capability checks are enforced for protected content APIs.
 - Initial content CRUD vertical slice is implemented and tested.
-- CI gates now include comment policy, lint, typecheck, unit tests, integration tests, and build.
-- Self-hosted product packaging and worktree-lane delivery model are now the authoritative execution direction.
-- Playwright E2E, commit policy enforcement, and security workflow coverage are part of the active platform-distribution lane.
+- Checked-in Prisma migrations and deterministic seed profiles are now part of the repo baseline.
+- CI gates now include comment policy, lint, typecheck, unit tests, integration tests, Playwright E2E, build, and security scanning.
+- Self-hosted product packaging is now the authoritative product direction.
+- Worktrees remain an execution pattern for parallel delivery, but no extra worktrees are currently active after merging the platform lane back into `development`.
 
 ## Documentation Standards
 

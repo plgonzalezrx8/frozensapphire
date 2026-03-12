@@ -8,7 +8,7 @@
 
 1. `pnpm install`
 2. `cp .env.example .env`
-3. `docker-compose up -d`
+3. `docker compose up -d`
 4. `pnpm prisma:generate`
 5. `pnpm prisma:migrate`
 6. `pnpm seed:dev`
@@ -20,7 +20,7 @@ Open `http://localhost:3000` for the public site and `http://localhost:3000/admi
 
 The MVP product model is self-hosted, not SaaS:
 
-- Docker-first install via `docker-compose`
+- Docker-first install via `docker compose`
 - Manual Node deployment with documented prerequisites
 - Generic `Postgres`, `Redis`, and `S3-compatible` storage
 - Local `Auth.js` credentials/session auth backed by Prisma
