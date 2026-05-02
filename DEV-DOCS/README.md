@@ -1,12 +1,13 @@
 # DEV-DOCS - Developer Documentation (frozensapphire)
 
 **Last Updated:** March 6, 2026
-**Status:** In Progress
+**Status:** Planned/backlog as of 2026-05-02
 
 Linear is the single source of truth for frozensapphire planning:
 
 - Project board: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
 - Canonical planning state: milestones, issue status, next work, and backlog
+- Current Linear status: planned/backlog behind TheLivingOrthodoxSynaxarion, Strikepoint, and LunaLighthouse
 
 This folder remains the canonical home for frozensapphire development documentation, requirements, architecture, standards, and work-log history.
 

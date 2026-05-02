@@ -11,7 +11,7 @@ Describe milestone delivery, sequencing, and exit criteria for the MVP build.
 
 ## Current State
 
-Plan is approved; implementation is in progress and incomplete.
+Plan is approved; implementation is incomplete and resumes when Linear promotes frozensapphire back into an active lane.
 
 ## Project: frozensapphire (Next.js CMS)
 

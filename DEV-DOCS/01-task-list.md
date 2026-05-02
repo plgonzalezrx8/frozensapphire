@@ -5,21 +5,21 @@
 
 ## Purpose
 
-Provide a thin local pointer to the active Linear issue queue.
+Provide a thin local pointer to the Linear issue queue. Linear owns live task state, sprint selection, and backlog order.
 
 ## Current State
 
-Foundation scaffold is in place and Milestone 1 hardening is active on `development`.
+Foundation scaffold is in place. As of 2026-05-02, frozensapphire is planned/backlog behind TheLivingOrthodoxSynaxarion, Strikepoint, and LunaLighthouse.
 
 - Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
 
 ## Current Issue Snapshot
 
-### In Progress
+### Resume Snapshot
 
 - [BLU-39 — Stabilize auth and RBAC behavior](https://linear.app/blueforce-innovations/issue/BLU-39/stabilize-auth-and-rbac-behavior)
 
-### Todo
+### Additional Resume Items
 
 - [BLU-40 — Expand content CRUD tests and edge-case coverage](https://linear.app/blueforce-innovations/issue/BLU-40/expand-content-crud-tests-and-edge-case-coverage)
 - [BLU-41 — Add auth and RBAC audit event coverage](https://linear.app/blueforce-innovations/issue/BLU-41/add-auth-and-rbac-audit-event-coverage)

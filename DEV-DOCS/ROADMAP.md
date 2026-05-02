@@ -1,7 +1,7 @@
 # Roadmap
 
 **Last Updated:** March 6, 2026
-**Status:** In Progress
+**Status:** Planned/backlog as of 2026-05-02
 
 > Linear is the single source of truth for live planning state: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac). This file is roadmap intent and milestone-definition reference only.
 
@@ -11,11 +11,11 @@ Provide a milestone-based roadmap aligned with the TRD’s 16-week cadence.
 
 ## Current State
 
-Foundation is complete and Milestone 1 is in progress:
+Foundation is complete and Milestone 1 is the resume focus when Linear promotes the project back into an active lane:
 
 - Completed: scaffold, Prisma baseline, API skeleton, CI/test harness.
 - Completed: credentials auth baseline, middleware admin protection, RBAC guard foundation.
-- In progress: first content CRUD vertical slice hardening and coverage expansion.
+- Resume focus: first content CRUD vertical slice hardening and coverage expansion.
 - Not started: editor/media/taxonomies/themes/plugins/import/export/privacy.
 
 ## Milestones (16-week cadence)
@@ -33,7 +33,7 @@ Foundation is complete and Milestone 1 is in progress:
 - Auth.js credentials
 - RBAC guards and audit logging
 - Admin shell protected
-**Status:** In Progress
+**Status:** Planned/backlog; resume when Linear promotes the project
 
 ### Milestone 2 — Content Core (Weeks 4–5)
 - Content types and items CRUD

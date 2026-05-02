@@ -9,7 +9,7 @@ Define the functional and non-functional requirements for the frozensapphire CMS
 
 ## Current State
 
-Requirements are approved; implementation is in progress and incomplete.
+Requirements are approved; implementation is incomplete and resumes when Linear promotes frozensapphire back into an active lane.
 
 ## Project: frozensapphire (Next.js CMS with WordPress-core-like capabilities)
 

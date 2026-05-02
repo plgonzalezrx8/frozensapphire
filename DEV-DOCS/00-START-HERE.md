@@ -1,7 +1,7 @@
 # 00 - Start Here
 
 **Last Updated:** March 6, 2026
-**Status:** In Progress
+**Status:** Planned/backlog as of 2026-05-02
 
 ## Purpose
 
@@ -12,9 +12,10 @@ Provide a short onboarding path for contributors while delegating live planning 
 The project has a working baseline: scaffolded Next.js app, Prisma schema, CI/testing harness, credentials auth, RBAC guards, and first content CRUD APIs/UI.
 
 - Planning source: [frozensapphire in Linear](https://linear.app/blueforce-innovations/project/frozensapphire-b19d7f40e3ac)
-- Current phase: Milestone 1 in progress (auth, RBAC, and first content CRUD hardening)
-- Primary active issue: [BLU-39 — Stabilize auth and RBAC behavior](https://linear.app/blueforce-innovations/issue/BLU-39/stabilize-auth-and-rbac-behavior)
-- Immediate next issues:
+- Current Linear status: planned/backlog as of 2026-05-02, behind TheLivingOrthodoxSynaxarion, Strikepoint, and LunaLighthouse
+- Resume focus: Milestone 1 hardening (auth, RBAC, and first content CRUD) only when Linear promotes the project back into an active lane
+- Resume issue snapshot:
+  - [BLU-39 — Stabilize auth and RBAC behavior](https://linear.app/blueforce-innovations/issue/BLU-39/stabilize-auth-and-rbac-behavior)
   - [BLU-40 — Expand content CRUD tests and edge-case coverage](https://linear.app/blueforce-innovations/issue/BLU-40/expand-content-crud-tests-and-edge-case-coverage)
   - [BLU-41 — Add auth and RBAC audit event coverage](https://linear.app/blueforce-innovations/issue/BLU-41/add-auth-and-rbac-audit-event-coverage)
 - Current blocker: none active.
